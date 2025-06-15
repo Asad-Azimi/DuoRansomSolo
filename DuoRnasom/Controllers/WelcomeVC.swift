@@ -17,13 +17,40 @@ class WelcomeVc: UIViewController {
     }()
     
     
-    private let startButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle("Create New Game", for: .normal)
-        button.titleLabel?.font = .systemFont(ofSize: 18, weight: .medium)
+    private let NewGameButton: UIButton = {
+        var config = UIButton.Configuration.filled()
+        config.title = "New Game"
+        config.baseBackgroundColor = .systemGreen
+        config.baseForegroundColor = .white
+        config.cornerStyle = .medium
+        config.contentInsets = NSDirectionalEdgeInsets(top: 12, leading: 24, bottom: 12, trailing: 24)
+        let button = UIButton(configuration: config)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
+    
+    
+    private let JoinGameButton: UIButton = {
+        var config = UIButton.Configuration.filled()
+        config.title = "Join Game"
+        config.baseBackgroundColor = .systemBlue
+        config.baseForegroundColor = .white
+        config.cornerStyle = .medium
+        config.contentInsets = NSDirectionalEdgeInsets(top: 12, leading: 24, bottom: 12, trailing: 24)
+        let button = UIButton(configuration: config)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    
+    private let logoImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "duoOwl")
+        imageView.contentMode = .scaleAspectFit
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    
     
     
     override func viewDidLoad() {
@@ -31,21 +58,36 @@ class WelcomeVc: UIViewController {
         view.backgroundColor = .systemBackground
         
         view.addSubview(titleLabel)
-        view.addSubview(startButton)
+        view.addSubview(NewGameButton)
+        view.addSubview(logoImageView)
+        view.addSubview(JoinGameButton)
         
         NSLayoutConstraint.activate([
             titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             titleLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -40),
             
-            startButton.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
-            startButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+            NewGameButton.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 60),
+            NewGameButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            
+            logoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            logoImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 90),
+            logoImageView.widthAnchor.constraint(equalToConstant: 150),
+            logoImageView.heightAnchor.constraint(equalToConstant: 150),
+            
+            JoinGameButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            JoinGameButton.topAnchor.constraint(equalTo: NewGameButton.bottomAnchor, constant: 20)
         ])
         
-        startButton.addTarget(self, action: #selector(startButtonTapped), for: .touchUpInside)
+        NewGameButton.addTarget(self, action: #selector(NewGameButtonTapped), for: .touchUpInside)
+        JoinGameButton.addTarget(self, action: #selector(JoinGameButtonTapped), for: .touchUpInside)
     }
     
-    @objc private func startButtonTapped() {
+    @objc private func NewGameButtonTapped() {
         print ("New Game Creation Will Start!")
+    }
+    
+    @objc private func JoinGameButtonTapped() {
+        print ("Joinging an Existing Game!")
     }
 }
 
