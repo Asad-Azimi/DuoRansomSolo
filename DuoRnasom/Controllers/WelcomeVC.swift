@@ -6,7 +6,7 @@
 //
 import UIKit
 
-class WelcomeVc: UIViewController {
+class WelcomeVC: UIViewController {
     
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -83,7 +83,8 @@ class WelcomeVc: UIViewController {
     }
     
     @objc private func NewGameButtonTapped() {
-        print ("New Game Creation Will Start!")
+        let createVC = CreateNewGameVC()
+        navigationController?.pushViewController(createVC, animated: true)
     }
     
     @objc private func JoinGameButtonTapped() {
